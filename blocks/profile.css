@@ -1,0 +1,39 @@
+.profile {
+  margin-top: 36.25px;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.profile__avatar {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+.profile-info {
+}
+
+.profile-info__name {
+  color: #fff;
+  margin: 0 0 0 30px;
+}
+
+.profile-info__name_edit_btn {
+}
+
+.profile-info__edit-btn {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-info__occupation {
+  color: #fff;
+  margin: 0 0 0 30px;
+}
+
+.profile__add-btn {
+  margin-left: 165px;
+  width: 150px;
+  height: 50px;
+}

@@ -1,0 +1,11 @@
+.header {
+  min-height: 4.6rem;
+  max-width: 100%;
+  background-color: black;
+  border-bottom: 1px solid #545454;
+}
+
+.header__logo {
+  width: 10.8rem;
+  height: 2rem;
+}
