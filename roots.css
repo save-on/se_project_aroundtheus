@@ -1,5 +1,6 @@
 .page {
-  max-width: 880px;
+  max-width: 100%;
+  min-height: 100vh;
   background-color: #000;
   padding: 45px 200px 60px;
   text-transform: capitalize;
