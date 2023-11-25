@@ -53,3 +53,9 @@
 .card__group:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 320px) {
+  .cards {
+    margin-top: 36px;
+  }
+}
