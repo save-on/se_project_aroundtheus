@@ -14,6 +14,11 @@
   background-repeat: no-repeat;
 }
 
+.profile__profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .profile__title {
   display: flex;
   align-items: center;
@@ -46,7 +51,7 @@
 }
 
 .profile__add-btn {
-  background: transparent url(../images/Add\ Button.svg);
+  background: transparent url(../images/add-btn.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
