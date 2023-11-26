@@ -1,6 +1,5 @@
 .header {
   min-height: 74px;
-  background-color: black;
   border-bottom: 1px solid #545454;
   margin-top: 45px;
 }
@@ -10,16 +9,9 @@
   height: 33px;
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 638px) {
   .header__logo {
     width: 126px;
     height: 24px;
-  }
-}
-
-@media screen and (max-width: 936px) {
-  .header__logo {
-    width: 145px;
-    height: 28px;
   }
 }

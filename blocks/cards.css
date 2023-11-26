@@ -7,7 +7,8 @@
 .cards__list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   grid-gap: 20px 17px;
@@ -41,7 +42,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 219px;
 }
 
 .card__group {
@@ -56,15 +56,8 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 638px) {
   .cards {
     margin-top: 36px;
-  }
-}
-
-@media screen and (max-width: 936px) {
-  .cards__list {
-    margin: 0 auto;
-    max-width: 100%;
   }
 }
