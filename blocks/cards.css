@@ -14,48 +14,6 @@
   grid-gap: 20px 17px;
 }
 
-.card {
-  width: 282px;
-  background-color: #fff;
-  border-radius: 10px;
-  height: 361px;
-}
-
-.card__image {
-  width: 282px;
-  height: 282px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
-.card__info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 25px 30px 25px 20px;
-}
-
-.card__title {
-  margin: 0;
-  font-weight: 900;
-  font-size: 24px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.card__group {
-  width: 21px;
-  height: 18px;
-  opacity: 1;
-  transition: opacity 0.3s ease-out 0s;
-  cursor: pointer;
-}
-
-.card__group:hover {
-  opacity: 0.5;
-}
-
 @media screen and (max-width: 638px) {
   .cards {
     margin-top: 36px;
