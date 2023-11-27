@@ -12,7 +12,7 @@
 
 - [Tiny PNG to compress the images down](https://tinypng.com/)
 - [Hex -> RGBA](https://rgbacolorpicker.com/hex-to-rgba)
-- [For information or to get clarity](https://www.w3schools.com/)
+- [W3schools](https://www.w3schools.com/)
 
 **Images**
 
