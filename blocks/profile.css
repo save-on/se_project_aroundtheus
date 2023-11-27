@@ -67,7 +67,6 @@
 
 .profile__add-btn {
   background: transparent url(../images/add__btn.svg);
-  background-position: center;
   border: none;
   border-radius: 2px;
   margin: 0 0 0 auto;
