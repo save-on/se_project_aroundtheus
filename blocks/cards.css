@@ -1,21 +1,13 @@
 .cards {
-  margin-top: 51px;
   display: flex;
-  flex-direction: column;
 }
 
 .cards__list {
   list-style-type: none;
   padding: 0;
-  margin: 0 auto;
+  margin: 51px auto 0;
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   grid-gap: 20px 17px;
-}
-
-@media screen and (max-width: 638px) {
-  .cards {
-    margin-top: 36px;
-  }
 }
