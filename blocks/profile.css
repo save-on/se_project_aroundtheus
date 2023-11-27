@@ -30,7 +30,7 @@
   font-size: 42px;
   font-weight: 500;
   margin: 0 0 0 30px;
-  max-width: 373px;
+  max-width: 375px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -85,9 +85,18 @@
 }
 
 @media screen and (max-width: 790px) {
+  .profile__title {
+    gap: 5px;
+  }
+
   .profile__name {
-    font-size: 36px;
-    margin: 0 0 0 20px;
+    font-size: 32px;
+    margin: 0 0 0 10px;
+  }
+
+  .profile__edit-btn {
+    width: 20px;
+    height: 20px;
   }
 
   .profile__add-btn {
@@ -95,11 +104,12 @@
     background-repeat: no-repeat;
     background-position: center;
     border: 2px solid #fff;
-    width: 50px;
+    width: 45px;
+    height: 45px;
   }
 
   .profile__occupation {
-    margin: 7px 0 0 20px;
+    margin: 7px 0 0 10px;
     max-width: 320px;
   }
 }
