@@ -97,12 +97,13 @@
   }
 
   .profile__add-btn {
-    background: transparent url(../images/plus-sign.svg);
+    background: transparent url(../images/add__btn.svg);
     background-repeat: no-repeat;
     background-position: center;
-    border: 2px solid #fff;
-    width: 45px;
-    height: 45px;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    width: 50px;
+    height: 50px;
   }
 
   .profile__occupation {
