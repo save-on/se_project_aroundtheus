@@ -1,5 +1,5 @@
 .modal {
-  display: flex;
+  display: none;
   justify-content: center;
   position: fixed;
   top: 0;
@@ -9,6 +9,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   padding: 0 20px;
+}
+
+.modal_opened {
+  display: flex;
 }
 
 .modal__container {
