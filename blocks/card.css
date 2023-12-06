@@ -45,3 +45,9 @@
 .card__group:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 790px) {
+  .card__group {
+    background-size: contain;
+  }
+}
