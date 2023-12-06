@@ -37,6 +37,9 @@ const modalInputOccupation = modal.querySelector(
   ".modal__input_type_occupation"
 );
 const modalForm = modal.querySelector(".modal__form");
+const cardsList = page.querySelector(".cards__list");
+const cardTemplate =
+  page.querySelector("#card__template").content.firstElementChild;
 
 // Functions
 function modalToggleBtn() {
@@ -46,9 +49,13 @@ function modalToggleBtn() {
 }
 
 function getCardElement(data) {
-  let cardElement = page.querySelector("#card__element").content;
-  let cardsList = cardElement.querySelector(".cards__list");
-  let card = cardElement.querySelector(".card").cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  cardImageEl.src = data.link;
+  cardImageEl.alt = data.name;
+  cardTitleEl.textContent = data.name;
+  return cardElement;
 }
 // Event Handlers
 function profileEditHandler(e) {
@@ -64,3 +71,9 @@ profileEditBtn.addEventListener("click", modalToggleBtn);
 modalCloseBtn.addEventListener("click", modalToggleBtn);
 
 modalForm.addEventListener("submit", profileEditHandler);
+
+initialCards.forEach((data) => {
+  const cardElement = getCardElement(data);
+  // may have to prepend in the future
+  cardsList.append(cardElement);
+});
