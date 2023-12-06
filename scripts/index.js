@@ -26,13 +26,31 @@ const initialCards = [
 ];
 
 const page = document.querySelector(".page");
-const editBtn = page.querySelector(".profile__edit-btn");
 const modal = page.querySelector(".modal");
-const closeBtn = page.querySelector(".modal__close-btn");
+const profileEditBtn = page.querySelector(".profile__edit-btn");
+const profileName = page.querySelector(".profile__name");
+const profileOccupation = page.querySelector(".profile__occupation");
+const modalCloseBtn = modal.querySelector(".modal__close-btn");
+const modalInputName = modal.querySelector(".modal__input_type_name");
+const modalInputOccupation = modal.querySelector(
+  ".modal__input_type_occupation"
+);
+const modalForm = modal.querySelector(".modal__form");
+modalSaveBtn = modal.querySelector(".modal__save-btn");
 
-function toggleBtn() {
+function modalToggleBtn() {
   modal.classList.toggle("modal_opened");
+  modalInputName.value = profileName.textContent;
+  modalInputOccupation.value = profileOccupation.textContent;
 }
 
-editBtn.addEventListener("click", toggleBtn);
-closeBtn.addEventListener("click", toggleBtn);
+profileEditBtn.addEventListener("click", modalToggleBtn);
+
+modalCloseBtn.addEventListener("click", modalToggleBtn);
+
+modalForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  profileName.textContent = modalInputName.value;
+  profileOccupation.textContent = modalInputOccupation.value;
+  modalToggleBtn();
+});
