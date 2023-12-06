@@ -30,10 +30,9 @@ const editBtn = page.querySelector(".profile__edit-btn");
 const modal = page.querySelector(".modal");
 const closeBtn = page.querySelector(".modal__close-btn");
 
-editBtn.addEventListener("click", function () {
-  modal.classList.add("modal_opened");
-});
+function toggleBtn() {
+  modal.classList.toggle("modal_opened");
+}
 
-closeBtn.addEventListener("click", function () {
-  modal.classList.remove("modal_opened");
-});
+editBtn.addEventListener("click", toggleBtn);
+closeBtn.addEventListener("click", toggleBtn);
