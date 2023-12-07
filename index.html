@@ -44,24 +44,29 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
-      <div class="modal__container">
-        <h2 class="modal__title">Edit Profile</h2>
-        <button aria-label="Close Button" class="modal__close-btn"></button>
-        <form class="modal__form">
+    <div class="profileModal">
+      <div class="profileModal__container">
+        <h2 class="profileModal__title">Edit Profile</h2>
+        <button
+          aria-label="Close Button"
+          class="profileModal__close-btn"
+        ></button>
+        <form class="profileModal__form">
           <input
-            class="modal__input modal__input_type_name"
+            class="profileModal__input profileModal__input_type_name"
             type="text"
             name="Name"
             placeholder="Name"
+            required
           />
           <input
-            class="modal__input modal__input_type_occupation"
+            class="profileModal__input profileModal__input_type_occupation"
             type="text"
             name="Occupation"
             placeholder="Occupation"
+            required
           />
-          <button type="submit" class="modal__save-btn" value="Save">
+          <button type="submit" class="profileModal__save-btn" value="Save">
             Save
           </button>
         </form>
@@ -80,6 +85,6 @@
         </div>
       </li>
     </template>
-    <script src="scripts/index.js"></script>
+    <script src="scripts/index.js" defer></script>
   </body>
 </html>

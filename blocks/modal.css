@@ -1,4 +1,4 @@
-.modal {
+.profileModal {
   display: none;
   justify-content: center;
   position: fixed;
@@ -11,11 +11,11 @@
   padding: 0 20px;
 }
 
-.modal_opened {
+.profileModal_opened {
   display: flex;
 }
 
-.modal__container {
+.profileModal__container {
   position: relative;
   width: 430px;
   height: 330px;
@@ -25,7 +25,7 @@
   padding: 36px;
 }
 
-.modal__title {
+.profileModal__title {
   font-family: Inter, Arial, sans-serif;
   font-size: 24px;
   font-weight: 900;
@@ -33,7 +33,7 @@
   margin: 0 0 54px;
 }
 
-.modal__close-btn {
+.profileModal__close-btn {
   border: none;
   position: absolute;
   right: -45px;
@@ -49,16 +49,16 @@
   transition: opacity 0.3s ease-out 0s;
 }
 
-.modal__close-btn:hover {
+.profileModal__close-btn:hover {
   opacity: 0.6;
 }
 
-.modal__form {
+.profileModal__form {
   display: flex;
   flex-direction: column;
 }
 
-.modal__input {
+.profileModal__input {
   text-transform: capitalize;
   font-family: Inter, Arial, sans-serif;
   margin: 0 0 30px;
@@ -67,11 +67,11 @@
   padding: 13px 0;
 }
 
-.modal__input:nth-child(2n) {
+.profileModal__input:last-of-type {
   margin: 0 0 48px;
 }
 
-.modal__save-btn {
+.profileModal__save-btn {
   width: 100%;
   height: 50px;
   border-radius: 2px;
@@ -84,32 +84,32 @@
   transition: opacity 0.3s ease-out 0s;
 }
 
-.modal__save-btn:hover {
+.profileModal__save-btn:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 638px) {
-  .modal__container {
+  .profileModal__container {
     padding: 25px;
   }
 
-  .modal__title {
+  .profileModal__title {
     font-size: 18px;
     margin: 0 0 75px;
   }
 
-  .modal__close-btn {
+  .profileModal__close-btn {
     height: 26px;
     width: 26px;
     right: 0;
     top: -50px;
   }
 
-  .modal__input:nth-child(2n) {
+  .profileModal__input:last-of-type {
     margin: 0 0 45px;
   }
 
-  .modal__save-btn {
+  .profileModal__save-btn {
     height: 46px;
   }
 }
