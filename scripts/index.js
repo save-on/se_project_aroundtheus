@@ -27,31 +27,27 @@ const initialCards = [
 
 // Elements
 const page = document.querySelector(".page");
-const profileModal = page.querySelector(".profileModal");
+const profileModal = page.querySelector(".profile-modal");
 const profileEditBtn = page.querySelector(".profile__edit-btn");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
-const profileModalCloseBtn = profileModal.querySelector(
-  ".profileModal__close-btn"
+const profileCloseBtn = profileModal.querySelector(".modal__close-btn");
+const modalInputName = profileModal.querySelector(".modal__input_type_name");
+const modalInputOccupation = profileModal.querySelector(
+  ".modal__input_type_occupation"
 );
-const profileModalInputName = profileModal.querySelector(
-  ".profileModal__input_type_name"
-);
-const profileModalInputOccupation = profileModal.querySelector(
-  ".profileModal__input_type_occupation"
-);
-const profileModalForm = profileModal.querySelector(".profileModal__form");
+const modalForm = profileModal.querySelector(".modal__form");
 const cardsList = page.querySelector(".cards__list");
 const cardTemplate =
   page.querySelector("#card__template").content.firstElementChild;
 
 // Function
 function openProfileModal() {
-  profileModal.classList.add("profileModal_opened");
+  profileModal.classList.add("modal_opened");
 }
 
 function closeProfileModal() {
-  profileModal.classList.remove("profileModal_opened");
+  profileModal.classList.remove("modal_opened");
 }
 
 function getCardElement(data) {
@@ -65,13 +61,13 @@ function getCardElement(data) {
 }
 
 function fillProfileForm() {
-  profileModalInputName.value = profileName.textContent;
-  profileModalInputOccupation.value = profileOccupation.textContent;
+  modalInputName.value = profileName.textContent;
+  modalInputOccupation.value = profileOccupation.textContent;
 }
 
 function changeProfileText() {
-  profileName.textContent = profileModalInputName.value;
-  profileOccupation.textContent = profileModalInputOccupation.value;
+  profileName.textContent = modalInputName.value;
+  profileOccupation.textContent = modalInputOccupation.value;
 }
 
 // Event Handlers
@@ -87,9 +83,9 @@ profileEditBtn.addEventListener("click", () => {
   fillProfileForm();
 });
 
-profileModalCloseBtn.addEventListener("click", closeProfileModal);
+profileCloseBtn.addEventListener("click", closeProfileModal);
 
-profileModalForm.addEventListener("submit", handleProfileEditFormSubmit);
+modalForm.addEventListener("submit", handleProfileEditFormSubmit);
 
 initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
