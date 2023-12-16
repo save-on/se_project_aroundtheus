@@ -33,7 +33,7 @@
           <button
             aria-label="Create Button"
             type="button"
-            class="profile__add-btn"
+            class="profile__create-btn"
           ></button>
         </section>
         <section class="cards page__section">
@@ -47,7 +47,10 @@
     <div class="modal profile-modal">
       <div class="modal__container">
         <h2 class="modal__title">Edit Profile</h2>
-        <button aria-label="Close Button" class="modal__close-btn"></button>
+        <button
+          aria-label="Close Button"
+          class="modal__close-btn modal__close_profile-modal"
+        ></button>
         <form class="modal__form">
           <input
             class="modal__input modal__input_type_name"
@@ -63,8 +66,40 @@
             placeholder="Occupation"
             required
           />
-          <button type="submit" class="modal__save-btn" value="Save">
+          <button type="submit" class="modal__btn modal__save-btn" value="Save">
             Save
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="modal add-card-modal">
+      <div class="modal__container">
+        <h2 class="modal__title">New Place</h2>
+        <button
+          aria-label="Close Button"
+          class="modal__close-btn modal__close_create-modal"
+        ></button>
+        <form class="modal__form">
+          <input
+            class="modal__input modal__input_type_create-title"
+            type="text"
+            name="title"
+            placeholder="Title"
+            required
+          />
+          <input
+            class="modal__input modal__input_type_image-link"
+            type="text"
+            name="image-link"
+            placeholder="Image link"
+            required
+          />
+          <button
+            type="submit"
+            class="modal__btn modal__create-btn"
+            value="create"
+          >
+            Create
           </button>
         </form>
       </div>

@@ -31,7 +31,9 @@ const profileModal = page.querySelector(".profile-modal");
 const profileEditBtn = page.querySelector(".profile__edit-btn");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
-const profileCloseBtn = profileModal.querySelector(".modal__close-btn");
+const profileCloseBtn = profileModal.querySelector(
+  ".modal__close_profile-modal"
+);
 const modalInputName = profileModal.querySelector(".modal__input_type_name");
 const modalInputOccupation = profileModal.querySelector(
   ".modal__input_type_occupation"
@@ -40,6 +42,16 @@ const modalForm = profileModal.querySelector(".modal__form");
 const cardsList = page.querySelector(".cards__list");
 const cardTemplate =
   page.querySelector("#card__template").content.firstElementChild;
+const addCardModal = page.querySelector(".add-card-modal");
+const profileCreateBtn = page.querySelector(".profile__create-btn");
+const createCloseBtn = addCardModal.querySelector(".modal__close_create-modal");
+const modalCreateBtn = addCardModal.querySelector(".modal__create-btn");
+const modalInputCreateTitle = addCardModal.querySelector(
+  ".modal__input_type_create-title"
+);
+const modalInputImageLink = addCardModal.querySelector(
+  ".modal__input_type_image-link"
+);
 
 // Function
 function openProfileModal() {
