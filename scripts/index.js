@@ -81,6 +81,9 @@ function getCardElement(data) {
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__group_active");
   });
+  cardTrashBtn.addEventListener("click", () => {
+    cardElement.remove();
+  });
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
