@@ -76,6 +76,10 @@ function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const cardLikeBtn = cardElement.querySelector(".card__group");
+  cardLikeBtn.addEventListener("click", () => {
+    cardLikeBtn.classList.toggle("card__group_active");
+  });
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
@@ -138,4 +142,7 @@ profileCreateBtn.addEventListener("click", () => openModal(addCardModal));
 createCloseBtn.addEventListener("click", () => closeModal(addCardModal));
 modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 
+// Loops
 initialCards.forEach((data) => renderCard(data));
+
+focusLikeBtns();

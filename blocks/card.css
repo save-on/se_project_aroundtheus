@@ -33,9 +33,9 @@
   background: transparent url(../images/Group.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   border: none;
-  width: 21px;
+  width: 22px;
   height: 18px;
   opacity: 1;
   transition: opacity 0.3s ease-out 0s;
@@ -44,6 +44,11 @@
 
 .card__group:hover {
   opacity: 0.5;
+}
+
+.card__group_active {
+  background: transparent url(../images/Union.svg);
+  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 790px) {
