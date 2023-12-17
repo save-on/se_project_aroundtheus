@@ -95,16 +95,20 @@ function changeProfileText() {
 function createCard() {
   const name = modalInputCreateTitle.value;
   const link = modalInputImageLink.value;
-  const cardElement = getCardElement({
+  renderCard({
     name,
     link,
   });
-  cardsList.prepend(cardElement);
 }
 
-function resetCreateCardsField() {
-  modalInputCreateTitle.value = "";
-  modalInputImageLink.value = "";
+function resetInputValue(a, b) {
+  a.value = "";
+  b.value = "";
+}
+
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  cardsList.prepend(cardElement);
 }
 
 // Event Handlers
@@ -118,7 +122,7 @@ function handleCardCreateFormSubmit(e) {
   e.preventDefault();
   createCard();
   closeModal(addCardModal);
-  resetCreateCardsField();
+  resetInputValue(modalInputCreateTitle, modalInputImageLink);
 }
 
 // Event Listeners
@@ -134,8 +138,4 @@ profileCreateBtn.addEventListener("click", () => openModal(addCardModal));
 createCloseBtn.addEventListener("click", () => closeModal(addCardModal));
 modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
-  // may have to prepend in the future
-  cardsList.append(cardElement);
-});
+initialCards.forEach((data) => renderCard(data));
