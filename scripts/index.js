@@ -77,6 +77,7 @@ function getCardElement(data) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__group");
+  const cardTrashBtn = cardElement.querySelector(".card__trash-bin");
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__group_active");
   });

@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   width: 282px;
   background-color: #fff;
   border-radius: 10px;
@@ -9,6 +10,26 @@
   height: 282px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+}
+
+.card__trash-bin {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent url(../images/Trash.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  width: 18px;
+  height: 19px;
+  opacity: 1;
+  transition: opacity 0.3s ease-out 0s;
+}
+
+.card__trash-bin:hover {
+  opacity: 0.6;
 }
 
 .card__info {
