@@ -72,6 +72,10 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
+function deleteItem(item) {
+  item.remove();
+}
+
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -81,9 +85,7 @@ function getCardElement(data) {
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__group_active");
   });
-  cardTrashBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
+  cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
