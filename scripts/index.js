@@ -150,5 +150,3 @@ modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 
 // Loops
 initialCards.forEach((data) => renderCard(data));
-
-focusLikeBtns();
