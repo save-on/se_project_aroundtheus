@@ -12,27 +12,6 @@
   max-height: 75vh;
 }
 
-.picture-modal__close-btn {
-  position: absolute;
-  top: -45px;
-  right: -45px;
-  background: transparent url(../images/close-icon.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  border: none;
-  padding: 0;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.3s ease-out 0s;
-}
-
-.picture-modal__close-btn:hover {
-  opacity: 0.6;
-}
-
 .picture-modal__title {
   color: #fff;
   font-family: Inter, Arial, sans-serif;

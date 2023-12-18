@@ -47,11 +47,8 @@
     <div class="modal profile-modal">
       <div class="modal__container">
         <h2 class="modal__title">Edit Profile</h2>
-        <button
-          aria-label="Close Button"
-          class="modal__close-btn modal__close-btn_profile-modal"
-        ></button>
-        <form class="modal__form modal__form_profile">
+        <button aria-label="Close Button" class="modal__close-btn"></button>
+        <form class="modal__form" name="profile-form">
           <input
             class="modal__input modal__input_type_name"
             type="text"
@@ -75,11 +72,8 @@
     <div class="modal add-card-modal">
       <div class="modal__container">
         <h2 class="modal__title">New Place</h2>
-        <button
-          aria-label="Close Button"
-          class="modal__close-btn modal__close-btn_create-modal"
-        ></button>
-        <form class="modal__form modal__form_create">
+        <button aria-label="Close Button" class="modal__close-btn"></button>
+        <form class="modal__form" name="card-form">
           <input
             class="modal__input modal__input_type_create-title"
             type="text"
@@ -106,8 +100,8 @@
     </div>
     <div class="modal picture-modal">
       <div class="picture-modal__container">
-        <img class="picture-modal__image" src="./images/lago.jpg" alt="lago" />
-        <button class="picture-modal__close-btn"></button>
+        <img class="picture-modal__image" src="./images/lago.jpg" alt="name" />
+        <button class="modal__close-btn"></button>
         <h3 class="picture-modal__title">Test Text</h3>
       </div>
     </div>
