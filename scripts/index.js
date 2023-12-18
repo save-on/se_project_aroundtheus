@@ -95,6 +95,7 @@ function getCardElement(data) {
   cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
   cardImageEl.addEventListener("click", () => {
     pictureModalImage.src = data.link;
+    pictureModalImage.alt = data.name;
     pictureModalTitle.textContent = data.name;
     pictureModal.classList.add("modal_opened");
   });
