@@ -43,10 +43,12 @@ const profileEditBtn = page.querySelector(".profile__edit-btn");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 const profileCloseBtn = profileModal.querySelector(
-  ".modal__close_profile-modal"
+  ".modal__close-btn_profile-modal"
 );
 const profileCreateBtn = page.querySelector(".profile__create-btn");
-const createCloseBtn = addCardModal.querySelector(".modal__close_create-modal");
+const createCloseBtn = addCardModal.querySelector(
+  ".modal__close-btn_create-modal"
+);
 const modalCreateBtn = addCardModal.querySelector(".modal__create-btn");
 const pictureModalCloseBtn = pictureModal.querySelector(
   ".picture-modal__close-btn"
