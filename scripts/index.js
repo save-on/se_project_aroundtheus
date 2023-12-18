@@ -31,6 +31,7 @@ const initialCards = [
 const page = document.querySelector(".page");
 const profileModal = page.querySelector(".profile-modal");
 const addCardModal = page.querySelector(".add-card-modal");
+const pictureModal = page.querySelector(".picture-modal");
 
 // Cards
 const cardsList = page.querySelector(".cards__list");
@@ -47,6 +48,11 @@ const profileCloseBtn = profileModal.querySelector(
 const profileCreateBtn = page.querySelector(".profile__create-btn");
 const createCloseBtn = addCardModal.querySelector(".modal__close_create-modal");
 const modalCreateBtn = addCardModal.querySelector(".modal__create-btn");
+const pictureModalCloseBtn = pictureModal.querySelector(
+  ".picture-modal__close-btn"
+);
+const pictureModalImage = pictureModal.querySelector(".picture-modal__image");
+const pictureModalTitle = pictureModal.querySelector(".picture-modal__title");
 
 // Form Data
 const modalInputOccupation = profileModal.querySelector(
@@ -82,10 +88,17 @@ function getCardElement(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__group");
   const cardTrashBtn = cardElement.querySelector(".card__trash-bin");
+
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__group_active");
   });
   cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
+  cardImageEl.addEventListener("click", () => {
+    pictureModalImage.src = data.link;
+    pictureModalTitle.textContent = data.name;
+    pictureModal.classList.add("modal_opened");
+  });
+
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
@@ -141,12 +154,11 @@ profileEditBtn.addEventListener("click", () => {
   fillProfileForm();
 });
 profileCloseBtn.addEventListener("click", () => closeModal(profileModal));
-
 modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
-
 profileCreateBtn.addEventListener("click", () => openModal(addCardModal));
 createCloseBtn.addEventListener("click", () => closeModal(addCardModal));
 modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
+pictureModalCloseBtn.addEventListener("click", () => closeModal(pictureModal));
 
 // Loops
 initialCards.forEach((data) => renderCard(data));
