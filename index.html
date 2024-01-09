@@ -48,21 +48,29 @@
       <div class="modal__container">
         <h2 class="modal__title">Edit Profile</h2>
         <button aria-label="Close Button" class="modal__close-btn"></button>
-        <form class="modal__form" name="profile-form">
+        <form class="modal__form" name="profile-form" novalidate>
           <input
             class="modal__input modal__input_type_name"
+            id="modal__name"
             type="text"
             name="Name"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__input-error modal__name-error"></span>
           <input
             class="modal__input modal__input_type_occupation"
+            id="modal__occupation"
             type="text"
             name="Occupation"
             placeholder="Occupation"
+            minlength="2"
+            maxlength="200"
             required
           />
+          <span class="modal__input-error modal__occupation-error"></span>
           <button type="submit" class="modal__btn modal__save-btn" value="Save">
             Save
           </button>
@@ -73,21 +81,27 @@
       <div class="modal__container">
         <h2 class="modal__title">New Place</h2>
         <button aria-label="Close Button" class="modal__close-btn"></button>
-        <form class="modal__form" name="card-form">
+        <form class="modal__form" name="card-form" novalidate>
           <input
             class="modal__input modal__input_type_create-title"
+            id="modal__title"
             type="text"
             name="title"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span class="modal__input-error modal__title-error"></span>
           <input
             class="modal__input modal__input_type_image-link"
-            type="text"
+            id="image-link"
+            type="url"
             name="image-link"
             placeholder="Image link"
             required
           />
+          <span class="modal__input-error image-link-error"></span>
           <button
             type="submit"
             class="modal__btn modal__create-btn"
@@ -124,5 +138,6 @@
       </li>
     </template>
     <script src="scripts/index.js" defer></script>
+    <script src="scripts/validation.js" defer></script>
   </body>
 </html>
