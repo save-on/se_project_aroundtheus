@@ -33,7 +33,7 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
+  const inputList = [...formElement.querySelectorAll(".modal__input")];
   const buttonElement = formElement.querySelector(".modal__btn");
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
@@ -45,7 +45,7 @@ const setEventListeners = (formElement) => {
 };
 
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".modal__form"));
+  const formList = [...document.querySelectorAll(".modal__form")];
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (e) => {
       e.preventDefault();

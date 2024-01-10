@@ -32,6 +32,7 @@ const page = document.querySelector(".page");
 const profileModal = page.querySelector(".profile-modal");
 const addCardModal = page.querySelector(".add-card-modal");
 const pictureModal = page.querySelector(".picture-modal");
+const modals = page.querySelectorAll(".modal");
 
 // Cards
 const cardsList = page.querySelector(".cards__list");
@@ -154,4 +155,17 @@ initialCards.forEach(renderCard);
 closeBtns.forEach((button) => {
   const modal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(modal));
+});
+
+modals.forEach((modal) => {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal(modal);
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal(modal);
+    }
+  });
 });
