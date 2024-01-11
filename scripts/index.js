@@ -67,10 +67,12 @@ const modalInputImageLink = addCardModal.querySelector(
 // Function
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escapeCloseModal);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.addEventListener("keydown", escapeCloseModal);
 }
 
 function deleteItem(item) {
@@ -139,6 +141,14 @@ function handleCardCreateFormSubmit(e) {
   e.target.reset();
 }
 
+function escapeCloseModal(e) {
+  modals.forEach((modal) => {
+    if (e.key === "Escape") {
+      closeModal(modal);
+    }
+  });
+}
+
 // Event Listeners
 profileEditBtn.addEventListener("click", () => {
   openModal(profileModal);
@@ -160,11 +170,6 @@ closeBtns.forEach((button) => {
 modals.forEach((modal) => {
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-      closeModal(modal);
-    }
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
       closeModal(modal);
     }
   });
