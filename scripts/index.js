@@ -67,12 +67,12 @@ const modalInputImageLink = addCardModal.querySelector(
 // Function
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escapeCloseModal);
+  document.addEventListener("keydown", closingModalByEsc);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.addEventListener("keydown", escapeCloseModal);
+  document.removeEventListener("keydown", closingModalByEsc);
 }
 
 function deleteItem(item) {
@@ -141,12 +141,11 @@ function handleCardCreateFormSubmit(e) {
   e.target.reset();
 }
 
-function escapeCloseModal(e) {
-  modals.forEach((modal) => {
-    if (e.key === "Escape") {
-      closeModal(modal);
-    }
-  });
+function closingModalByEsc(e) {
+  const openedModal = document.querySelector(".modal_opened");
+  if (e.key === "Escape") {
+    closeModal(openedModal);
+  }
 }
 
 // Event Listeners
