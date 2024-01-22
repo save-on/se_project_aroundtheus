@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -65,31 +67,22 @@ const modalInputImageLink = addCardModal.querySelector(
 );
 
 // Function
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", closingModalByEsc);
-}
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closingModalByEsc);
-}
-
-function deleteItem(item) {
-  item.remove();
-}
-
+// function deleteItem(item) {
+//   item.remove();
+// }
+// -----------------------------------------------------------------------------
 function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const cardLikeBtn = cardElement.querySelector(".card__group");
-  const cardTrashBtn = cardElement.querySelector(".card__trash-bin");
+  // const cardElement = cardTemplate.cloneNode(true);
+  // const cardImageEl = cardElement.querySelector(".card__image");
+  // const cardTitleEl = cardElement.querySelector(".card__title");
+  // const cardLikeBtn = cardElement.querySelector(".card__group");
+  // const cardTrashBtn = cardElement.querySelector(".card__trash-bin");
 
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__group_active");
-  });
-  cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
+  // cardLikeBtn.addEventListener("click", () => {
+  //   cardLikeBtn.classList.toggle("card__group_active");
+  // });
+  // cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
   cardImageEl.addEventListener("click", () => {
     pictureModalImage.src = data.link;
     pictureModalImage.alt = data.name;
@@ -97,12 +90,12 @@ function getCardElement(data) {
     openModal(pictureModal);
   });
 
-  cardImageEl.src = data.link;
-  cardImageEl.alt = data.name;
-  cardTitleEl.textContent = data.name;
-  return cardElement;
+  // cardImageEl.src = data.link;
+  // cardImageEl.alt = data.name;
+  // cardTitleEl.textContent = data.name;
+  // return cardElement;
 }
-
+// -----------------------------------------------------------------------------
 function fillProfileForm() {
   modalInputName.value = profileName.textContent;
   modalInputOccupation.value = profileOccupation.textContent;
@@ -122,8 +115,22 @@ function createCard() {
   });
 }
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
+function openModal(modal) {
+  console.log(modal);
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closingModalByEsc);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closingModalByEsc);
+}
+
+function renderCard(data) {
+  const card = new Card(data, "#card__template", () => {
+    openModal(pictureModal);
+  });
+  const cardElement = card.generateCard();
   cardsList.prepend(cardElement);
 }
 
