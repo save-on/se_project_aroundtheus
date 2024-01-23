@@ -68,34 +68,6 @@ const modalInputImageLink = addCardModal.querySelector(
 
 // Function
 
-// function deleteItem(item) {
-//   item.remove();
-// }
-// -----------------------------------------------------------------------------
-function getCardElement(data) {
-  // const cardElement = cardTemplate.cloneNode(true);
-  // const cardImageEl = cardElement.querySelector(".card__image");
-  // const cardTitleEl = cardElement.querySelector(".card__title");
-  // const cardLikeBtn = cardElement.querySelector(".card__group");
-  // const cardTrashBtn = cardElement.querySelector(".card__trash-bin");
-
-  // cardLikeBtn.addEventListener("click", () => {
-  //   cardLikeBtn.classList.toggle("card__group_active");
-  // });
-  // cardTrashBtn.addEventListener("click", () => deleteItem(cardElement));
-  cardImageEl.addEventListener("click", () => {
-    pictureModalImage.src = data.link;
-    pictureModalImage.alt = data.name;
-    pictureModalTitle.textContent = data.name;
-    openModal(pictureModal);
-  });
-
-  // cardImageEl.src = data.link;
-  // cardImageEl.alt = data.name;
-  // cardTitleEl.textContent = data.name;
-  // return cardElement;
-}
-// -----------------------------------------------------------------------------
 function fillProfileForm() {
   modalInputName.value = profileName.textContent;
   modalInputOccupation.value = profileOccupation.textContent;
