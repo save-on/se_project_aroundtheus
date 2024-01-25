@@ -2,6 +2,9 @@ export default class formValidator {
   constructor(options, formElement) {
     this._options = options;
     this._formElement = formElement;
+    this._buttonElement = this._formElement.querySelector(
+      this._options.submitButtonSelector
+    );
   }
 
   _showInputError() {
@@ -14,12 +17,21 @@ export default class formValidator {
   }
 
   _hideInputError() {
-    this._errorElement = document.querySelector(
+    this._errorElement = this._formElement.querySelector(
       `.${this._inputElement.id}-error`
     );
     this._errorElement.textContent = "";
     this._errorElement.classList.remove(this._options.errorClass);
     this._inputElement.classList.remove(this._options.inputClassError);
+  }
+
+  resetValidation() {
+    this.toggleButtonState();
+    this._buttonElement.setAttribute("disabled", true);
+    this._inputList.forEach((inputElement) => {
+      this._inputElement = inputElement;
+      this._hideInputError();
+    });
   }
 
   _hasInvalidInput() {
@@ -48,9 +60,6 @@ export default class formValidator {
     this._inputList = [
       ...this._formElement.querySelectorAll(this._options.inputSelector),
     ];
-    this._buttonElement = this._formElement.querySelector(
-      this._options.submitButtonSelector
-    );
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
