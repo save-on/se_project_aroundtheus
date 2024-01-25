@@ -4,13 +4,13 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._cardLikeBtn = this._cardElement.querySelector(".card__group");
-    this._cardTrashBtn = this._cardElement.querySelector(".card__trash-bin");
-    this._cardImage = this._cardElement.querySelector(".card__image");
-    this._element = this._getTemplate();
   }
 
   _setEventListener() {
+    this._cardLikeBtn = this._cardElement.querySelector(".card__group");
+    this._cardTrashBtn = this._cardElement.querySelector(".card__trash-bin");
+    this._cardImage = this._cardElement.querySelector(".card__image");
+
     this._cardLikeBtn.addEventListener("click", () => {
       this._handleLikeBtn();
     });
@@ -42,6 +42,7 @@ export default class Card {
   }
 
   generateCard() {
+    this._element = this._getTemplate();
     this._setEventListener();
 
     this._element.querySelector(".card__image").src = this._link;
