@@ -156,6 +156,7 @@ modals.forEach((modal) => {
   });
 });
 
-const formValidator = new FormValidator(config);
-formValidator.enableValidation();
-formValidator.toggleButtonState();
+const editValidator = new FormValidator(config, modalFormProfile);
+const cardValidator = new FormValidator(config, modalFormCreate);
+editValidator.enableValidation();
+cardValidator.enableValidation();

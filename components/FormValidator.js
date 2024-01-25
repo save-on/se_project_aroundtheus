@@ -1,6 +1,7 @@
 export default class formValidator {
-  constructor(options) {
+  constructor(options, formElement) {
     this._options = options;
+    this._formElement = formElement;
   }
 
   _showInputError() {
@@ -61,13 +62,9 @@ export default class formValidator {
   }
 
   enableValidation() {
-    const formList = [...document.querySelectorAll(this._options.formSelector)];
-    formList.forEach((formElement) => {
-      this._formElement = formElement;
-      this._formElement.addEventListener("submit", (e) => {
-        e.preventDefault();
-      });
-      this._setEventListeners();
+    this._formElement.addEventListener("submit", (e) => {
+      e.preventDefault();
     });
+    this._setEventListeners();
   }
 }
