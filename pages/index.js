@@ -46,7 +46,8 @@ const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 const closeBtns = page.querySelectorAll(".modal__close-btn");
 const profileCreateBtn = page.querySelector(".profile__create-btn");
-const profileSaveBtn = page.querySelector(".modal__save-btn");
+const pictureModalImage = document.querySelector(".picture-modal__image");
+const pictureModalTitle = document.querySelector(".picture-modal__title");
 
 // Form Data
 const modalInputOccupation = profileModal.querySelector(
@@ -121,9 +122,6 @@ function closeModal(modal) {
 
 function createCardInstance(item) {
   const card = new Card(item, "#card__template", () => {
-    const pictureModalImage = document.querySelector(".picture-modal__image");
-    const pictureModalTitle = document.querySelector(".picture-modal__title");
-
     pictureModalImage.src = item.link;
     pictureModalImage.alt = item.name;
     pictureModalTitle.textContent = item.name;
@@ -146,6 +144,7 @@ function handleProfileEditFormSubmit() {
 function handleCardCreateFormSubmit(e) {
   createCard();
   e.target.reset();
+  formValidators["card-form"].resetValidation();
   closeModal(addCardModal);
 }
 
@@ -172,7 +171,7 @@ initialCards.forEach(renderCard);
 
 closeBtns.forEach((button) => {
   const modal = button.closest(".modal");
-  button.addEventListener("mousedown", () => closeModal(modal));
+  button.addEventListener("click", () => closeModal(modal));
 });
 
 modals.forEach((modal) => {

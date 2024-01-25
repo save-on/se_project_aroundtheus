@@ -27,7 +27,6 @@ export default class formValidator {
 
   resetValidation() {
     this.toggleButtonState();
-    this._buttonElement.setAttribute("disabled", true);
     this._inputList.forEach((inputElement) => {
       this._inputElement = inputElement;
       this._hideInputError();
