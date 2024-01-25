@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -38,8 +39,6 @@ const modals = page.querySelectorAll(".modal");
 
 // Cards
 const cardsList = page.querySelector(".cards__list");
-const cardTemplate =
-  page.querySelector("#card__template").content.firstElementChild;
 
 // Btns and other nodes
 const profileEditBtn = page.querySelector(".profile__edit-btn");
@@ -47,9 +46,6 @@ const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 const closeBtns = page.querySelectorAll(".modal__close-btn");
 const profileCreateBtn = page.querySelector(".profile__create-btn");
-const modalCreateBtn = addCardModal.querySelector(".modal__create-btn");
-const pictureModalImage = pictureModal.querySelector(".picture-modal__image");
-const pictureModalTitle = pictureModal.querySelector(".picture-modal__title");
 
 // Form Data
 const modalInputOccupation = profileModal.querySelector(
@@ -65,6 +61,16 @@ const modalInputCreateTitle = addCardModal.querySelector(
 const modalInputImageLink = addCardModal.querySelector(
   ".modal__input_type_image-link"
 );
+
+// Settings
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__btn",
+  errorClass: "modal__input-error_active",
+  inputClassError: "modal__input_type_error",
+};
 
 // Function
 
@@ -88,7 +94,6 @@ function createCard() {
 }
 
 function openModal(modal) {
-  console.log(modal);
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closingModalByEsc);
 }
@@ -107,14 +112,12 @@ function renderCard(data) {
 }
 
 // Event Handlers
-function handleProfileEditFormSubmit(e) {
-  e.preventDefault();
+function handleProfileEditFormSubmit() {
   changeProfileText();
   closeModal(profileModal);
 }
 
 function handleCardCreateFormSubmit(e) {
-  e.preventDefault();
   createCard();
   closeModal(addCardModal);
   e.target.reset();
@@ -152,3 +155,7 @@ modals.forEach((modal) => {
     }
   });
 });
+
+const formValidator = new FormValidator(config);
+formValidator.enableValidation();
+formValidator.toggleButtonState();
