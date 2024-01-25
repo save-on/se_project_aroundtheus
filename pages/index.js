@@ -46,6 +46,7 @@ const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 const closeBtns = page.querySelectorAll(".modal__close-btn");
 const profileCreateBtn = page.querySelector(".profile__create-btn");
+const profileSaveBtn = page.querySelector(".modal__save-btn");
 
 // Form Data
 const modalInputOccupation = profileModal.querySelector(
@@ -71,6 +72,13 @@ const config = {
   errorClass: "modal__input-error_active",
   inputClassError: "modal__input_type_error",
 };
+
+// Class Instances
+
+const editValidator = new FormValidator(config, modalFormProfile);
+const cardValidator = new FormValidator(config, modalFormCreate);
+editValidator.enableValidation();
+cardValidator.enableValidation();
 
 // Function
 
@@ -113,14 +121,17 @@ function renderCard(data) {
 
 // Event Handlers
 function handleProfileEditFormSubmit() {
+  profileSaveBtn.setAttribute("disabled", true);
   changeProfileText();
   closeModal(profileModal);
 }
 
 function handleCardCreateFormSubmit(e) {
   createCard();
-  closeModal(addCardModal);
   e.target.reset();
+  editValidator.toggleButtonState();
+  cardValidator.toggleButtonState();
+  closeModal(addCardModal);
 }
 
 function closingModalByEsc(e) {
@@ -155,8 +166,3 @@ modals.forEach((modal) => {
     }
   });
 });
-
-const editValidator = new FormValidator(config, modalFormProfile);
-const cardValidator = new FormValidator(config, modalFormCreate);
-editValidator.enableValidation();
-cardValidator.enableValidation();
