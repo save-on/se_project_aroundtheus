@@ -52,11 +52,11 @@ enableValidation(config);
 const cardSection = new Section(
   {
     data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, "#card__template", () => {
-        pictureModalImage.src = item.link;
-        pictureModalImage.alt = item.name;
-        pictureModalTitle.textContent = item.name;
+    renderer: ({ name, link }) => {
+      const card = new Card({ name, link }, "#card__template", () => {
+        pictureModalImage.src = link;
+        pictureModalImage.alt = name;
+        pictureModalTitle.textContent = name;
         openModal(pictureModal);
       });
       const cardElement = card.generateCard();
@@ -112,7 +112,7 @@ function handleProfileEditFormSubmit() {
 }
 
 function handleCardCreateFormSubmit(e) {
-  createCard(); // <---
+  createCard();
   e.target.reset();
   formValidators["card-form"].resetValidation();
   closeModal(addCardModal);
