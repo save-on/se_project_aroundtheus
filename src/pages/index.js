@@ -112,9 +112,17 @@ function handleProfileEditFormSubmit() {
 }
 
 function handleCardCreateFormSubmit(e) {
-  createCard();
+  const data = createCard();
   e.target.reset();
   formValidators["card-form"].resetValidation();
+  const newCard = new Card(data, "#card__template", () => {
+    pictureModalImage.src = data.link;
+    pictureModalImage.alt = data.name;
+    pictureModalTitle.textContent = data.name;
+    openModal(pictureModal);
+  });
+  const cardElement = newCard.generateCard();
+  cardSection.addItem(cardElement);
   closeModal(addCardModal);
 }
 
