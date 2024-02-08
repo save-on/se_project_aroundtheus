@@ -13,12 +13,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import {
   initialCards,
   profileModal,
-  modals,
   cardsList,
   profileEditBtn,
   profileName,
   profileOccupation,
-  closeBtns,
   profileCreateBtn,
   pictureModalImage,
   pictureModalTitle,
@@ -51,6 +49,8 @@ const enableValidation = (config) => {
 enableValidation(config);
 
 const imagePopup = new PopupWithImage(".picture-modal");
+imagePopup.setEventListener();
+
 const cardSection = new Section(
   {
     data: initialCards,
@@ -70,6 +70,8 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 const newCardPopup = new PopupWithForm(".add-card-modal", () => {});
+newCardPopup.setEventListener();
+
 // const userInfo = new UserInfo("");
 /* ______________________________________________________________________________________________________ * 
 
@@ -143,7 +145,6 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 profileCreateBtn.addEventListener("click", () => newCardPopup.open());
-// ^ ^ ^ ^ ^ ^ ^
 modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
 modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 
@@ -152,16 +153,3 @@ modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 *                                             LOOPS                                                       *
 
 *  ______________________________________________________________________________________________________ */
-
-closeBtns.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closeModal(modal));
-});
-
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (e) => {
-    if (e.target === modal) {
-      closeModal(modal);
-    }
-  });
-});

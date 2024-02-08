@@ -33,7 +33,6 @@ export const page = document.querySelector(".page");
 export const profileModal = page.querySelector(".profile-modal");
 export const addCardModal = page.querySelector(".add-card-modal");
 export const pictureModal = page.querySelector(".picture-modal");
-export const modals = page.querySelectorAll(".modal");
 
 // CARDS
 export const cardsList = page.querySelector(".cards__list");
@@ -42,7 +41,6 @@ export const cardsList = page.querySelector(".cards__list");
 export const profileEditBtn = page.querySelector(".profile__edit-btn");
 export const profileName = page.querySelector(".profile__name");
 export const profileOccupation = page.querySelector(".profile__occupation");
-export const closeBtns = page.querySelectorAll(".modal__close-btn");
 export const profileCreateBtn = page.querySelector(".profile__create-btn");
 export const pictureModalImage = document.querySelector(
   ".picture-modal__image"
