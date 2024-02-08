@@ -59,12 +59,11 @@ export const modalInputName = profileModal.querySelector(
 );
 
 export const modalFormCreate = document.forms["card-form"];
-export const modalInputCreateTitle = addCardModal.querySelector(
-  ".modal__input_type_create-title"
-);
-export const modalInputImageLink = addCardModal.querySelector(
-  ".modal__input_type_image-link"
-);
+// export const modalInputCreateTitle = addCardModal.querySelector(
+//   ".modal__input_type_create-title"
+// export const modalInputImageLink = addCardModal.querySelector(
+//   ".modal__input_type_image-link"
+// );
 
 // SETTINGS
 export const config = {

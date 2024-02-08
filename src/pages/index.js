@@ -18,14 +18,9 @@ import {
   profileName,
   profileOccupation,
   profileCreateBtn,
-  pictureModalImage,
-  pictureModalTitle,
   modalInputOccupation,
   modalFormProfile,
   modalInputName,
-  modalFormCreate,
-  modalInputCreateTitle,
-  modalInputImageLink,
   config,
 } from "../utils/constants.js";
 
@@ -56,10 +51,7 @@ const cardSection = new Section(
     data: initialCards,
     renderer: ({ name, link }) => {
       const card = new Card({ name, link }, "#card__template", () => {
-        pictureModalImage.src = link;
-        pictureModalImage.alt = name;
-        pictureModalTitle.textContent = name;
-        imagePopup.open();
+        imagePopup.open({ name, link });
       });
       const cardElement = card.generateCard();
       cardSection.addItem(cardElement);
@@ -69,7 +61,16 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-const newCardPopup = new PopupWithForm(".add-card-modal", () => {});
+const newCardPopup = new PopupWithForm(".add-card-modal", () => {
+  const data = createCard();
+  formValidators["card-form"].resetValidation();
+  const newCard = new Card(data, "#card__template", () => {
+    imagePopup.open(data);
+  });
+  const cardElement = newCard.generateCard();
+  cardSection.addItem(cardElement);
+  newCardPopup.close();
+});
 newCardPopup.setEventListener();
 
 // const userInfo = new UserInfo("");
@@ -90,20 +91,10 @@ function changeProfileText() {
 }
 
 function createCard() {
-  const name = modalInputCreateTitle.value;
-  const link = modalInputImageLink.value;
-  return { name, link };
+  // const name = modalInputCreateTitle.value;
+  // const link = modalInputImageLink.value;
+  // return { name, link };
 }
-
-// function openModal(modal) {
-//   modal.classList.add("modal_opened"); // rm
-//   document.addEventListener("keydown", closingModalByEsc);
-// }
-
-// function closeModal(modal) {
-//   modal.classList.remove("modal_opened"); // rm
-//   document.removeEventListener("keydown", closingModalByEsc);
-// }
 
 /* ______________________________________________________________________________________________________ * 
 
@@ -116,21 +107,6 @@ function handleProfileEditFormSubmit() {
   closeModal(profileModal);
 }
 
-function handleCardCreateFormSubmit(e) {
-  const data = createCard();
-  e.target.reset();
-  formValidators["card-form"].resetValidation();
-  const newCard = new Card(data, "#card__template", () => {
-    pictureModalImage.src = data.link;
-    pictureModalImage.alt = data.name;
-    pictureModalTitle.textContent = data.name;
-    imagePopup.open();
-    // ^ ^ ^ ^ ^ ^ ^
-  });
-  const cardElement = newCard.generateCard();
-  cardSection.addItem(cardElement);
-  newCardPopup.close();
-}
 /* ______________________________________________________________________________________________________ * 
 
 *                                         EVENT LISTENERS                                                 *
@@ -146,7 +122,6 @@ profileEditBtn.addEventListener("click", () => {
 
 profileCreateBtn.addEventListener("click", () => newCardPopup.open());
 modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
-modalFormCreate.addEventListener("submit", handleCardCreateFormSubmit);
 
 /* ______________________________________________________________________________________________________ * 
 
