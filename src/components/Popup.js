@@ -1,24 +1,24 @@
 export default class Popup {
   constructor({ popupSelector }) {
-    this._popElement = document.querySelector(popupSelector);
+    this._popupElement = document.querySelector(popupSelector);
   }
 
   open() {
-    // opens popup
-    modal.classList.add("modal_opened");
+    this._popupElement.classList.add("modal_opened");
   }
 
   close() {
-    // closes popup
-    modal.classList.remove("modal_opened");
+    this._popupElement.classList.remove("modal_opened");
   }
 
-  _handleEscClose() {
-    // handle esc close
+  _handleEscClose(e) {
+    if (e.key === "Escape") {
+      const openedModal = document.querySelector(".modal_opened");
+      closeModal(openedModal);
+    }
   }
 
   setEventListener() {
-    // set eventlistener
-    this._popElement.addEventListener("click");
+    this._popupElement.addEventListener("click", () => {});
   }
 }
