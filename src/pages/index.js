@@ -18,6 +18,7 @@ import {
   profileCreateBtn,
   config,
 } from "../utils/constants.js";
+import "./index.css";
 
 /* ______________________________________________________________________________________________________ * 
 

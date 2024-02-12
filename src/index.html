@@ -3,15 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Around the US</title>
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/Vector.svg"
+          src="<%=require('./images/Vector.svg')%>"
           alt="around the U.S logo"
           class="header__logo"
         />
@@ -114,7 +112,11 @@
     </div>
     <div class="modal picture-modal">
       <div class="picture-modal__container">
-        <img class="picture-modal__image" src="./images/lago.jpg" alt="name" />
+        <img
+          class="picture-modal__image"
+          src="<%=require('./images/lago.jpg')%>"
+          alt="name"
+        />
         <button class="modal__close-btn"></button>
         <h3 class="picture-modal__title">Test Text</h3>
       </div>
@@ -137,6 +139,5 @@
         </div>
       </li>
     </template>
-    <script src="pages/index.js" type="module"></script>
   </body>
 </html>
