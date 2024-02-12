@@ -3,10 +3,9 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super({ popupSelector });
-    this._popupForm = document.forms["card-form"];
+    this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
-    this._name = document.querySelector(".modal__input_type_create-title");
-    this._link = document.querySelector(".modal__input_type_image-link");
+    this._inputList = [...this._popupForm.querySelectorAll(".modal__input")];
   }
 
   close() {
@@ -20,15 +19,15 @@ export default class PopupWithForm extends Popup {
 
   _getValueInputs() {
     const data = {};
-    data.name = this._name;
-    data.link = this._link;
-    console.log(this._name);
-    console.log(this._link);
+    this._inputList.forEach((inputElement) => {
+      data[inputElement.name] = inputElement.value;
+    });
+    return data;
   }
 
   setEventListener() {
     this._popupForm.addEventListener("submit", () => {
-      this._handleFormSubmit();
+      this._handleFormSubmit(this._getValueInputs());
     });
     super.setEventListener();
   }

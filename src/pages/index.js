@@ -9,6 +9,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 import {
   initialCards,
@@ -61,8 +62,7 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-const newCardPopup = new PopupWithForm(".add-card-modal", () => {
-  const data = createCard();
+const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   formValidators["card-form"].resetValidation();
   const newCard = new Card(data, "#card__template", () => {
     imagePopup.open(data);
@@ -73,27 +73,29 @@ const newCardPopup = new PopupWithForm(".add-card-modal", () => {
 });
 newCardPopup.setEventListener();
 
-// const userInfo = new UserInfo("");
+const profilePopup = new PopupWithForm(".profile-modal", (data) => {
+  formValidators["profile-form"].resetValidation();
+  const userInfo = new UserInfo(data);
+  profilePopup.close();
+  userInfo.setUserInfo();
+});
+
+profilePopup.setEventListener();
+
 /* ______________________________________________________________________________________________________ * 
 
 *                                             FUNCTIONS                                                   *
 
 * _______________________________________________________________________________________________________ */
 
-function fillProfileForm() {
-  modalInputName.value = profileName.textContent;
-  modalInputOccupation.value = profileOccupation.textContent;
-}
+// function fillProfileForm() {
+//   modalInputName.value = profileName.textContent;
+//   modalInputOccupation.value = profileOccupation.textContent;
+// }
 
 function changeProfileText() {
   profileName.textContent = modalInputName.value;
   profileOccupation.textContent = modalInputOccupation.value;
-}
-
-function createCard() {
-  // const name = modalInputCreateTitle.value;
-  // const link = modalInputImageLink.value;
-  // return { name, link };
 }
 
 /* ______________________________________________________________________________________________________ * 
@@ -102,10 +104,10 @@ function createCard() {
 
 *  ______________________________________________________________________________________________________ */
 
-function handleProfileEditFormSubmit() {
-  changeProfileText();
-  closeModal(profileModal);
-}
+// function handleProfileEditFormSubmit() {
+//   changeProfileText();
+//   closeModal(profileModal);
+// }
 
 /* ______________________________________________________________________________________________________ * 
 
@@ -114,14 +116,11 @@ function handleProfileEditFormSubmit() {
 *  ______________________________________________________________________________________________________ */
 
 profileEditBtn.addEventListener("click", () => {
-  formValidators["profile-form"].resetValidation();
-  // userInfo.open();
-  // ^ ^ ^ ^ ^ ^ ^
-  fillProfileForm();
+  profilePopup.open();
+  // userInfo.getUserInfo();
 });
-
 profileCreateBtn.addEventListener("click", () => newCardPopup.open());
-modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
+// modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
 
 /* ______________________________________________________________________________________________________ * 
 
