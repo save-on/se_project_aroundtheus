@@ -1,6 +1,6 @@
 /* ______________________________________________________________________________________________________ * 
 
-*                                             IMPORTS                                                     *
+*                                             IMPORTS                                                     
 
 *  ______________________________________________________________________________________________________ */
 
@@ -13,21 +13,15 @@ import UserInfo from "../components/UserInfo.js";
 
 import {
   initialCards,
-  profileModal,
   cardsList,
   profileEditBtn,
-  profileName,
-  profileOccupation,
   profileCreateBtn,
-  modalInputOccupation,
-  modalFormProfile,
-  modalInputName,
   config,
 } from "../utils/constants.js";
 
 /* ______________________________________________________________________________________________________ * 
 
-*                                             CLASS INSTANCES                                             *
+*                                             CLASS INSTANCES                                             
 
 *  ______________________________________________________________________________________________________ */
 
@@ -73,57 +67,25 @@ const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
 });
 newCardPopup.setEventListener();
 
+const userInfo = new UserInfo(".profile__name", ".profile__occupation");
+
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
   formValidators["profile-form"].resetValidation();
-  const userInfo = new UserInfo(data);
   profilePopup.close();
-  userInfo.setUserInfo();
+  userInfo.setUserInfo(data);
 });
 
 profilePopup.setEventListener();
 
 /* ______________________________________________________________________________________________________ * 
 
-*                                             FUNCTIONS                                                   *
-
-* _______________________________________________________________________________________________________ */
-
-// function fillProfileForm() {
-//   modalInputName.value = profileName.textContent;
-//   modalInputOccupation.value = profileOccupation.textContent;
-// }
-
-function changeProfileText() {
-  profileName.textContent = modalInputName.value;
-  profileOccupation.textContent = modalInputOccupation.value;
-}
-
-/* ______________________________________________________________________________________________________ * 
-
-*                                             EVENT HANDLERS                                              *
-
-*  ______________________________________________________________________________________________________ */
-
-// function handleProfileEditFormSubmit() {
-//   changeProfileText();
-//   closeModal(profileModal);
-// }
-
-/* ______________________________________________________________________________________________________ * 
-
-*                                         EVENT LISTENERS                                                 *
+*                                         EVENT LISTENERS                                                 
 
 *  ______________________________________________________________________________________________________ */
 
 profileEditBtn.addEventListener("click", () => {
   profilePopup.open();
-  // userInfo.getUserInfo();
+  userInfo.getUserInfo();
 });
+
 profileCreateBtn.addEventListener("click", () => newCardPopup.open());
-// modalFormProfile.addEventListener("submit", handleProfileEditFormSubmit);
-
-/* ______________________________________________________________________________________________________ * 
-
-*                                             LOOPS                                                       *
-
-*  ______________________________________________________________________________________________________ */

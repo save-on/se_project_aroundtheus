@@ -31,39 +31,13 @@ export const initialCards = [
 // WRAPPER
 export const page = document.querySelector(".page");
 export const profileModal = page.querySelector(".profile-modal");
-export const addCardModal = page.querySelector(".add-card-modal");
-export const pictureModal = page.querySelector(".picture-modal");
 
 // CARDS
 export const cardsList = page.querySelector(".cards__list");
 
 // BTNS / NODES
 export const profileEditBtn = page.querySelector(".profile__edit-btn");
-export const profileName = page.querySelector(".profile__name");
-export const profileOccupation = page.querySelector(".profile__occupation");
 export const profileCreateBtn = page.querySelector(".profile__create-btn");
-export const pictureModalImage = document.querySelector(
-  ".picture-modal__image"
-);
-export const pictureModalTitle = document.querySelector(
-  ".picture-modal__title"
-);
-
-// FORM DATA
-export const modalInputOccupation = profileModal.querySelector(
-  ".modal__input_type_occupation"
-);
-export const modalFormProfile = document.forms["profile-form"];
-export const modalInputName = profileModal.querySelector(
-  ".modal__input_type_name"
-);
-
-export const modalFormCreate = document.forms["card-form"];
-// export const modalInputCreateTitle = addCardModal.querySelector(
-//   ".modal__input_type_create-title"
-// export const modalInputImageLink = addCardModal.querySelector(
-//   ".modal__input_type_image-link"
-// );
 
 // SETTINGS
 export const config = {
