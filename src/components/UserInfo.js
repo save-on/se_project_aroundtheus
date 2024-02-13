@@ -5,7 +5,6 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    // this._name/occupation doesn't work here?
     this._inputOccupation = document.querySelector(
       ".modal__input_type_occupation"
     );
