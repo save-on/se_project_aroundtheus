@@ -63,7 +63,6 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-formValidators["card-form"].resetValidation(); // TODO: you don't need this step
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   const cardElement = createCard(data);
   cardSection.addItem(cardElement);
@@ -75,14 +74,10 @@ newCardPopup.setEventListener();
 
 const userInfo = new UserInfo(".profile__name", ".profile__occupation");
 
-// you need to call the "resetValidation" function at the ... moment
-formValidators["profile-form"].resetValidation(); // TODO: you don't need this step
-
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
   profilePopup.close();
   userInfo.setUserInfo(data);
 });
-
 profilePopup.setEventListener();
 
 /* ______________________________________________________________________________________________________ * 
@@ -92,10 +87,14 @@ profilePopup.setEventListener();
 *  ______________________________________________________________________________________________________ */
 
 profileEditBtn.addEventListener("click", () => {
+  formValidators["profile-form"].resetValidation();
   profilePopup.open();
   const info = userInfo.getUserInfo();
   modalInputName.value = info.name;
   modalInputOccupation.value = info.occupation;
 });
 
-profileCreateBtn.addEventListener("click", () => newCardPopup.open());
+profileCreateBtn.addEventListener("click", () => {
+  formValidators["card-form"].resetValidation();
+  newCardPopup.open();
+});
