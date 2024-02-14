@@ -63,17 +63,21 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-formValidators["card-form"].resetValidation();
+formValidators["card-form"].resetValidation(); // TODO: you don't need this step
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   const cardElement = createCard(data);
   cardSection.addItem(cardElement);
+
+  // TODO: before the nmodal will be closed 0 calll the reset validatiuon fun ction
   newCardPopup.close();
 });
 newCardPopup.setEventListener();
 
 const userInfo = new UserInfo(".profile__name", ".profile__occupation");
 
-formValidators["profile-form"].resetValidation();
+// you need to call the "resetValidation" function at the ... moment
+formValidators["profile-form"].resetValidation(); // TODO: you don't need this step
+
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
   profilePopup.close();
   userInfo.setUserInfo(data);
