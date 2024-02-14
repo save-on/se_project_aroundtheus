@@ -16,6 +16,8 @@ import {
   cardsList,
   profileEditBtn,
   profileCreateBtn,
+  modalInputName,
+  modalInputOccupation,
   config,
 } from "../utils/constants.js";
 import "./index.css";
@@ -39,17 +41,21 @@ const enableValidation = (config) => {
 };
 enableValidation(config);
 
+const createCard = (cardObject) => {
+  const card = new Card(cardObject, "#card__template", () => {
+    imagePopup.open(cardObject);
+  });
+  return card.generateCard();
+};
+
 const imagePopup = new PopupWithImage(".picture-modal");
 imagePopup.setEventListener();
 
 const cardSection = new Section(
   {
     data: initialCards,
-    renderer: ({ name, link }) => {
-      const card = new Card({ name, link }, "#card__template", () => {
-        imagePopup.open({ name, link });
-      });
-      const cardElement = card.generateCard();
+    renderer: (data) => {
+      const cardElement = createCard(data);
       cardSection.addItem(cardElement);
     },
   },
@@ -57,12 +63,9 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
+formValidators["card-form"].resetValidation();
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
-  formValidators["card-form"].resetValidation();
-  const newCard = new Card(data, "#card__template", () => {
-    imagePopup.open(data);
-  });
-  const cardElement = newCard.generateCard();
+  const cardElement = createCard(data);
   cardSection.addItem(cardElement);
   newCardPopup.close();
 });
@@ -70,8 +73,8 @@ newCardPopup.setEventListener();
 
 const userInfo = new UserInfo(".profile__name", ".profile__occupation");
 
+formValidators["profile-form"].resetValidation();
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
-  formValidators["profile-form"].resetValidation();
   profilePopup.close();
   userInfo.setUserInfo(data);
 });
@@ -86,7 +89,9 @@ profilePopup.setEventListener();
 
 profileEditBtn.addEventListener("click", () => {
   profilePopup.open();
-  userInfo.getUserInfo();
+  const info = userInfo.getUserInfo();
+  modalInputName.value = info.name;
+  modalInputOccupation.value = info.occupation;
 });
 
 profileCreateBtn.addEventListener("click", () => newCardPopup.open());

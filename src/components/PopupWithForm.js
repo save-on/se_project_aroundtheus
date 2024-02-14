@@ -9,12 +9,16 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    this._popupForm.reset();
     super.close();
+    this._popupForm.reset();
+    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
   }
 
   open() {
     super.open();
+    this._popupForm.addEventListener("submit", () => {
+      this._handleFormSubmit(this._getValueInputs());
+    });
   }
 
   _getValueInputs() {
@@ -23,12 +27,5 @@ export default class PopupWithForm extends Popup {
       data[inputElement.name] = inputElement.value;
     });
     return data;
-  }
-
-  setEventListener() {
-    this._popupForm.addEventListener("submit", () => {
-      this._handleFormSubmit(this._getValueInputs());
-    });
-    super.setEventListener();
   }
 }
