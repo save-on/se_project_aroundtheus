@@ -66,8 +66,6 @@ cardSection.renderItems();
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   const cardElement = createCard(data);
   cardSection.addItem(cardElement);
-
-  // TODO: before the nmodal will be closed 0 calll the reset validatiuon fun ction
   newCardPopup.close();
 });
 newCardPopup.setEventListener();
