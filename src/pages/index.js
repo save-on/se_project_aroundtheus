@@ -10,6 +10,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 import {
   initialCards,
@@ -78,6 +79,22 @@ const profilePopup = new PopupWithForm(".profile-modal", (data) => {
 });
 profilePopup.setEventListener();
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "3c5909bd-d1c1-439d-8361-757b3ef3e3b4",
+    "content-type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 /* ______________________________________________________________________________________________________ * 
 
 *                                         EVENT LISTENERS                                                 
