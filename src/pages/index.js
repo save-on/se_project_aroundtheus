@@ -87,14 +87,12 @@ const api = new Api({
   },
 });
 
-api
-  .getInitialCards()
+Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then((result) => {
     console.log(result);
   })
-  .catch((err) => {
-    console.error(err);
-  });
+  .catch((err) => console.error(err));
+
 /* ______________________________________________________________________________________________________ * 
 
 *                                         EVENT LISTENERS                                                 

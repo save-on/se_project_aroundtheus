@@ -18,5 +18,16 @@ export default class Api {
     });
   }
 
-  _getServerInfo() {}
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._authorization,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }
