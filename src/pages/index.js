@@ -29,56 +29,6 @@ import "./index.css";
 
 *  ______________________________________________________________________________________________________ */
 
-const formValidators = {};
-
-const enableValidation = (config) => {
-  const formList = [...document.querySelectorAll(config.formSelector)];
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(config, formElement);
-    const formName = formElement.getAttribute("name");
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-enableValidation(config);
-
-const createCard = (cardObject) => {
-  const card = new Card(cardObject, "#card__template", () => {
-    imagePopup.open(cardObject);
-  });
-  return card.generateCard();
-};
-
-const imagePopup = new PopupWithImage(".picture-modal");
-imagePopup.setEventListener();
-
-const cardSection = new Section(
-  {
-    data: initialCards,
-    renderer: (data) => {
-      const cardElement = createCard(data);
-      cardSection.addItem(cardElement);
-    },
-  },
-  cardsList
-);
-cardSection.renderItems();
-
-const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
-  const cardElement = createCard(data);
-  cardSection.addItem(cardElement);
-  newCardPopup.close();
-});
-newCardPopup.setEventListener();
-
-const userInfo = new UserInfo(".profile__name", ".profile__occupation");
-
-const profilePopup = new PopupWithForm(".profile-modal", (data) => {
-  profilePopup.close();
-  userInfo.setUserInfo(data);
-});
-profilePopup.setEventListener();
-
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -87,27 +37,82 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then((result) => {
-    console.log(result);
+Promise.all([api.getInitialCards(), api.getUserInfo(), api.editUserInfo()])
+  .then((results) => {
+    console.log(results);
+    const formValidators = {};
+
+    const enableValidation = (config) => {
+      const formList = [...document.querySelectorAll(config.formSelector)];
+      formList.forEach((formElement) => {
+        const validator = new FormValidator(config, formElement);
+        const formName = formElement.getAttribute("name");
+        formValidators[formName] = validator;
+        validator.enableValidation();
+      });
+    };
+    enableValidation(config);
+
+    const createCard = (cardObject) => {
+      const card = new Card(cardObject, "#card__template", () => {
+        imagePopup.open(cardObject);
+      });
+      return card.generateCard();
+    };
+
+    const imagePopup = new PopupWithImage(".picture-modal");
+    imagePopup.setEventListener();
+    const cardSection = new Section(
+      {
+        data: results[0],
+        renderer: (data) => {
+          const cardElement = createCard(data);
+          cardSection.addItem(cardElement);
+        },
+      },
+      cardsList
+    );
+    cardSection.renderItems();
+
+    const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
+      const cardElement = createCard(data);
+      cardSection.addItem(cardElement);
+      newCardPopup.close();
+    });
+    newCardPopup.setEventListener();
+
+    const userInfo = new UserInfo(
+      ".profile__name",
+      ".profile__occupation",
+      ".profile__avatar"
+    );
+
+    userInfo.setInitialInfo(results[1]);
+
+    const profilePopup = new PopupWithForm(".profile-modal", (data) => {
+      profilePopup.close();
+      userInfo.setUserInfo(data);
+      api.getUserChanges(data);
+    });
+    profilePopup.setEventListener();
+
+    /* ______________________________________________________________________________________________________ * 
+    
+    *                                         EVENT LISTENERS                                                 
+    
+    *  ______________________________________________________________________________________________________ */
+
+    profileEditBtn.addEventListener("click", () => {
+      formValidators["profile-form"].resetValidation();
+      profilePopup.open();
+      const info = userInfo.getUserInfo();
+      modalInputName.value = info.name;
+      modalInputOccupation.value = info.occupation;
+    });
+
+    profileCreateBtn.addEventListener("click", () => {
+      formValidators["card-form"].resetValidation();
+      newCardPopup.open();
+    });
   })
   .catch((err) => console.error(err));
-
-/* ______________________________________________________________________________________________________ * 
-
-*                                         EVENT LISTENERS                                                 
-
-*  ______________________________________________________________________________________________________ */
-
-profileEditBtn.addEventListener("click", () => {
-  formValidators["profile-form"].resetValidation();
-  profilePopup.open();
-  const info = userInfo.getUserInfo();
-  modalInputName.value = info.name;
-  modalInputOccupation.value = info.occupation;
-});
-
-profileCreateBtn.addEventListener("click", () => {
-  formValidators["card-form"].resetValidation();
-  newCardPopup.open();
-});
