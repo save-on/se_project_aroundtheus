@@ -32,10 +32,8 @@ export default class Api {
   }
 
   getUserChanges({ name, occupation }) {
-    return {
-      name,
-      about: occupation,
-    };
+    this._name = name;
+    this._occupation = occupation;
   }
 
   editUserInfo() {
@@ -45,7 +43,10 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-      body: JSON.stringify(this.getUserChanges()),
+      body: JSON.stringify({
+        name: this._name,
+        about: this._occupation,
+      }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
