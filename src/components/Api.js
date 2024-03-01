@@ -18,6 +18,20 @@ export default class Api {
     });
   }
 
+  addNewCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._authorization,
+        "content-type": this._contentType,
+      },
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    });
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
@@ -31,12 +45,7 @@ export default class Api {
     });
   }
 
-  getUserChanges({ name, occupation }) {
-    this._name = name;
-    this._occupation = occupation;
-  }
-
-  editUserInfo() {
+  editUserInfo({ name, occupation }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -44,8 +53,8 @@ export default class Api {
         "content-type": this._contentType,
       },
       body: JSON.stringify({
-        name: this._name,
-        about: this._occupation,
+        name,
+        about: occupation,
       }),
     }).then((res) => {
       if (res.ok) {

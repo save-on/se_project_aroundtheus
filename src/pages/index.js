@@ -37,7 +37,7 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getInitialCards(), api.getUserInfo(), api.editUserInfo()])
+Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then((results) => {
     console.log(results);
     const formValidators = {};
@@ -76,6 +76,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo(), api.editUserInfo()])
 
     const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
       const cardElement = createCard(data);
+      api.addNewCard(data);
       cardSection.addItem(cardElement);
       newCardPopup.close();
     });
@@ -92,7 +93,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo(), api.editUserInfo()])
     const profilePopup = new PopupWithForm(".profile-modal", (data) => {
       profilePopup.close();
       userInfo.setUserInfo(data);
-      api.getUserChanges(data);
+      api.editUserInfo(data);
     });
     profilePopup.setEventListener();
 
