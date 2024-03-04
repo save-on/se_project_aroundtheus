@@ -9,17 +9,18 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
 import {
-  initialCards,
   cardsList,
   profileEditBtn,
   profileCreateBtn,
   modalInputName,
   modalInputOccupation,
   config,
+  trashBtns,
 } from "../utils/constants.js";
 import "./index.css";
 
@@ -97,6 +98,14 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     });
     profilePopup.setEventListener();
 
+    const confirmationPopup = new PopupWithConfirmation(
+      ".delete-confirmation-modal",
+      () => {
+        confirmationPopup.close();
+      }
+    );
+    confirmationPopup.setEventListener();
+
     /* ______________________________________________________________________________________________________ * 
     
     *                                         EVENT LISTENERS                                                 
@@ -114,6 +123,12 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     profileCreateBtn.addEventListener("click", () => {
       formValidators["card-form"].resetValidation();
       newCardPopup.open();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("card__trash-bin")) {
+        confirmationPopup.open();
+      }
     });
   })
   .catch((err) => console.error(err));

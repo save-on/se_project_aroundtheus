@@ -16,11 +16,10 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt=""
-            class="profile__avatar"
-          />
+          <div class="profile__container">
+            <img src="" alt="" class="profile__avatar" />
+            <div class="profile__edit-avatar"></div>
+          </div>
           <div class="profile__profile-info">
             <div class="profile__title">
               <h1 class="profile__name"></h1>
@@ -100,7 +99,7 @@
             id="image-link"
             type="url"
             name="link"
-            placeholder="Image link"
+            placeholder="Image URL"
             required
           />
           <span class="modal__input-error image-link-error"></span>
@@ -123,6 +122,34 @@
         />
         <button class="modal__close-btn"></button>
         <h3 class="picture-modal__title">Test Text</h3>
+      </div>
+    </div>
+    <div class="modal delete-confirmation-modal">
+      <div class="modal__container modal__container_short">
+        <h2 class="modal__title">Are you sure?</h2>
+        <button aria-label="Close Button" class="modal__close-btn"></button>
+        <button type="submit" class="modal__btn modal__confirm-btn">Yes</button>
+      </div>
+    </div>
+    <div class="modal change-profile-modal">
+      <div class="modal__container modal__container_medium">
+        <h2 class="modal__title">Change profile picture</h2>
+        <button aria-label="Close Button" class="modal__close-btn"></button>
+        <form class="modal__form" name="change-profile-form" novalidate>
+          <input
+            class="modal__input modal__input_type_url"
+            id="url"
+            type="url"
+            name="url"
+            placeholder="Image URL"
+            required
+          />
+          <span class="modal__input-error url-error"></span>
+          <button type="button" class="modal__btn modal__save-btn" value="Save">
+            Save
+            <!--Saving...-->
+          </button>
+        </form>
       </div>
     </div>
     <template id="card__template">

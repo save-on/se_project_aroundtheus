@@ -10,7 +10,6 @@ export default class Card {
     this._cardLikeBtn = this._cardElement.querySelector(".card__group");
     this._cardTrashBtn = this._cardElement.querySelector(".card__trash-bin");
     this._cardImage = this._cardElement.querySelector(".card__image");
-
     this._cardLikeBtn.addEventListener("click", () => {
       this._handleLikeBtn();
     });

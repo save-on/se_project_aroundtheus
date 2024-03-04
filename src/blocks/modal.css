@@ -30,6 +30,16 @@
   padding: 36px;
 }
 
+.modal__container_short {
+  height: 181px;
+  padding: 36px 36px 0;
+}
+
+.modal__container_medium {
+  height: 272px;
+  padding: 36px 36px 0;
+}
+
 .modal__title {
   font-family: Inter, Arial, sans-serif;
   font-size: 24px;
