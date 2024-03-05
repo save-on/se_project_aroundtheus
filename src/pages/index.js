@@ -54,15 +54,23 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     };
     enableValidation(config);
 
-    const createCard = (cardObject) => {
-      const card = new Card(cardObject, "#card__template", () => {
-        imagePopup.open(cardObject);
-      });
+    const createCard = (data) => {
+      const card = new Card(
+        data,
+        "#card__template",
+        () => {
+          imagePopup.open(data);
+        },
+        () => {
+          confirmationPopup.open(data);
+        }
+      );
       return card.generateCard();
     };
 
     const imagePopup = new PopupWithImage(".picture-modal");
     imagePopup.setEventListener();
+
     const cardSection = new Section(
       {
         data: results[0],
@@ -100,7 +108,9 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
 
     const confirmationPopup = new PopupWithConfirmation(
       ".delete-confirmation-modal",
-      () => {
+      (cardData) => {
+        api.deleteCard(cardData);
+        // cardData.remove()
         confirmationPopup.close();
       }
     );
@@ -123,12 +133,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     profileCreateBtn.addEventListener("click", () => {
       formValidators["card-form"].resetValidation();
       newCardPopup.open();
-    });
-
-    document.addEventListener("click", (e) => {
-      if (e.target.classList.contains("card__trash-bin")) {
-        confirmationPopup.open();
-      }
     });
   })
   .catch((err) => console.error(err));
