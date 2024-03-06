@@ -55,15 +55,29 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     enableValidation(config);
 
     const createCard = (data) => {
+      const handleImageClick = () => {
+        imagePopup.open(data);
+      };
+
+      const handleDelete = () => {
+        confirmationPopup.open();
+        confirmationPopup.setSubmitAction(() => {
+          api.deleteCard(data);
+          confirmationPopup.close();
+          card.handleTrashBtn();
+        });
+      };
+
+      const handleLike = () => {
+        api.likeCard(data);
+      };
+
       const card = new Card(
         data,
         "#card__template",
-        () => {
-          imagePopup.open(data);
-        },
-        () => {
-          confirmationPopup.open(data);
-        }
+        handleImageClick,
+        handleDelete,
+        handleLike
       );
       return card.generateCard();
     };
@@ -107,12 +121,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     profilePopup.setEventListener();
 
     const confirmationPopup = new PopupWithConfirmation(
-      ".delete-confirmation-modal",
-      (cardData) => {
-        api.deleteCard(cardData);
-        // cardData.remove()
-        confirmationPopup.close();
-      }
+      ".delete-confirmation-modal"
     );
     confirmationPopup.setEventListener();
 
