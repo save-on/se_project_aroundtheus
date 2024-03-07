@@ -41,24 +41,12 @@ export default class Api {
     });
   }
 
-  likeCard({ isLiked, _id }) {
-    if (isLiked) {
-      return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-        method: "DELETE",
-        headers: {
-          authorization: this._authorization,
-        },
-      });
-    }
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      method: "PUT",
+  likeCard({ isLiked, id }) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: isLiked ? "DELETE" : "PUT",
       headers: {
         authorization: this._authorization,
-        "content-type": this._contentType,
       },
-      body: JSON.stringify({
-        isLiked: true,
-      }),
     });
   }
 
