@@ -16,7 +16,7 @@ export default class Card {
     this._cardImage = this._cardElement.querySelector(".card__image");
 
     this._cardLikeBtn.addEventListener("click", () => {
-      this._handleLike({ isLiked: this._isLiked, id: this._id });
+      this._handleLike({ isLiked: this._isLiked, id: this._id }, this);
     });
     this._cardTrashBtn.addEventListener("click", () => {
       this._handleDelete(this);
@@ -35,7 +35,13 @@ export default class Card {
     }
   }
 
-  handleTrashBtn() {
+  setLike(value) {
+    this._isLiked = value;
+    this._renderLikes();
+  }
+
+  handleTrashBtn(value) {
+    this._delete = value;
     this._cardElement.remove();
     this._cardElement = null;
   }

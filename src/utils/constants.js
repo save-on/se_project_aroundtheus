@@ -16,7 +16,7 @@ export const modalInputName = profileModal.querySelector(
 export const modalInputOccupation = profileModal.querySelector(
   ".modal__input_type_occupation"
 );
-export const trashBtns = page.querySelectorAll(".card__trash-bin");
+export const profileImageEdit = page.querySelector(".profile__edit-avatar");
 
 // SETTINGS
 export const config = {

@@ -20,7 +20,7 @@ import {
   modalInputName,
   modalInputOccupation,
   config,
-  trashBtns,
+  profileImageEdit,
 } from "../utils/constants.js";
 import "./index.css";
 
@@ -51,38 +51,34 @@ const enableValidation = (config) => {
 };
 enableValidation(config);
 
-const handleImageClick = () => {
+const handleImageClick = (data) => {
   imagePopup.open(data);
 };
 
-const handleDelete = () => {
+const handleDelete = (card) => {
+  //Delete doesn't truly delete after creating card
   confirmationPopup.open();
   confirmationPopup.setSubmitAction(() => {
-    api.deleteCard(data);
+    api
+      .deleteCard(card)
+      .then(() => {})
+      .catch((err) => console.error(err));
     confirmationPopup.close();
     card.handleTrashBtn();
   });
 };
 
-const handleLike = (data) => {
+const handleLike = (data, specificCard) => {
   api
     .likeCard(data)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
     .then((results) => {
-      card._renderLikes(results);
+      specificCard.setLike(results.isLiked);
     })
     .catch((err) => console.error(err));
 };
 
-let card;
-
 const createCard = (data) => {
-  card = new Card(
+  const card = new Card(
     data,
     "#card__template",
     handleImageClick,
@@ -97,9 +93,18 @@ imagePopup.setEventListener();
 
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   const cardElement = createCard(data);
-  api.addNewCard(data);
-  cardSection.addItem(cardElement);
+  newCardPopup.renderLoading(true);
   newCardPopup.close();
+  api
+    .addNewCard(data)
+    .then((results) => {
+      cardSection.addItem(cardElement);
+      console.log(results); // no idea what to do with this one
+    })
+    .catch((err) => console.error(err))
+    .finally(() => {
+      newCardPopup.renderLoading(false);
+    });
 });
 newCardPopup.setEventListener();
 
@@ -110,11 +115,37 @@ const userInfo = new UserInfo(
 );
 
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
+  profilePopup.renderLoading(true);
   profilePopup.close();
-  userInfo.setUserInfo(data);
-  api.editUserInfo(data);
+  api
+    .editUserInfo(data)
+    .then((results) => {
+      userInfo.setUserInfo(results);
+    })
+    .catch((err) => console.error(err))
+    .finally(() => {
+      renderLoading(false); // profile changes to saving... but doesn't change back
+    });
 });
 profilePopup.setEventListener();
+
+const changeProfilePopup = new PopupWithForm(
+  ".change-profile-modal",
+  ({ url }) => {
+    changeProfilePopup.renderLoading(true);
+    changeProfilePopup.close();
+    api
+      .editUserImage(url)
+      .then((results) => {
+        userInfo.changeUserPhoto(results["avatar"]);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        changeProfilePopup.renderLoading(false);
+      });
+  }
+);
+changeProfilePopup.setEventListener();
 
 const confirmationPopup = new PopupWithConfirmation(
   ".delete-confirmation-modal"
@@ -140,12 +171,17 @@ profileCreateBtn.addEventListener("click", () => {
   newCardPopup.open();
 });
 
+profileImageEdit.addEventListener("click", () => {
+  formValidators["change-profile-form"].resetValidation();
+  changeProfilePopup.open();
+});
+
 let cardSection;
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then((results) => {
-    userInfo.setInitialInfo(results[1]);
-
+    userInfo.setUserInfo(results[1]);
+    console.log(results);
     cardSection = new Section(
       {
         data: results[0],
