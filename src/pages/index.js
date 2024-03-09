@@ -56,7 +56,6 @@ const handleImageClick = (data) => {
 };
 
 const handleDelete = (card) => {
-  //Delete doesn't truly delete after creating card
   confirmationPopup.open();
   confirmationPopup.setSubmitAction(() => {
     api
@@ -92,14 +91,13 @@ const imagePopup = new PopupWithImage(".picture-modal");
 imagePopup.setEventListener();
 
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
-  const cardElement = createCard(data);
   newCardPopup.renderLoading(true);
   newCardPopup.close();
   api
     .addNewCard(data)
     .then((results) => {
+      const cardElement = createCard(results);
       cardSection.addItem(cardElement);
-      console.log(results); // no idea what to do with this one
     })
     .catch((err) => console.error(err))
     .finally(() => {
@@ -124,7 +122,7 @@ const profilePopup = new PopupWithForm(".profile-modal", (data) => {
     })
     .catch((err) => console.error(err))
     .finally(() => {
-      renderLoading(false); // profile changes to saving... but doesn't change back
+      profilePopup.renderLoading(false);
     });
 });
 profilePopup.setEventListener();
