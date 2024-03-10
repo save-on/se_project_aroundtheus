@@ -10,12 +10,6 @@ export const cardsList = page.querySelector(".cards__list");
 // BTNS / NODES
 export const profileEditBtn = page.querySelector(".profile__edit-btn");
 export const profileCreateBtn = page.querySelector(".profile__create-btn");
-export const modalInputName = profileModal.querySelector(
-  ".modal__input_type_name"
-);
-export const modalInputOccupation = profileModal.querySelector(
-  ".modal__input_type_occupation"
-);
 export const profileImageEdit = page.querySelector(".profile__edit-avatar");
 
 // SETTINGS

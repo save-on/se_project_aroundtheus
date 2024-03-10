@@ -17,8 +17,6 @@ import {
   cardsList,
   profileEditBtn,
   profileCreateBtn,
-  modalInputName,
-  modalInputOccupation,
   config,
   profileImageEdit,
 } from "../utils/constants.js";
@@ -58,9 +56,13 @@ const handleImageClick = (data) => {
 const handleDelete = (card) => {
   confirmationPopup.open();
   confirmationPopup.setSubmitAction(() => {
-    api.deleteCard(card).catch(console.error);
-    confirmationPopup.close();
-    card.handleTrashBtn();
+    api
+      .deleteCard(card)
+      .then(() => {
+        confirmationPopup.close();
+        card.handleTrashBtn();
+      })
+      .catch(console.error);
   });
 };
 
@@ -89,12 +91,12 @@ imagePopup.setEventListener();
 
 const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
   newCardPopup.renderLoading(true);
-  newCardPopup.close();
   api
     .addNewCard(data)
     .then((results) => {
       const cardElement = createCard(results);
       cardSection.addItem(cardElement);
+      newCardPopup.close();
     })
     .catch(console.error)
     .finally(() => {
@@ -111,11 +113,11 @@ const userInfo = new UserInfo(
 
 const profilePopup = new PopupWithForm(".profile-modal", (data) => {
   profilePopup.renderLoading(true);
-  profilePopup.close();
   api
     .editUserInfo(data)
     .then((results) => {
       userInfo.setUserInfo(results);
+      profilePopup.close();
     })
     .catch(console.error)
     .finally(() => {
@@ -128,12 +130,11 @@ const changeProfilePopup = new PopupWithForm(
   ".change-profile-modal",
   ({ url }) => {
     changeProfilePopup.renderLoading(true);
-    changeProfilePopup.close();
     api
       .editUserImage(url)
       .then((results) => {
-        userInfo.changeUserPhoto(results["avatar"]);
-        console.log(results);
+        userInfo.changeUserPhoto(results.avatar);
+        changeProfilePopup.close();
       })
       .catch(console.error)
       .finally(() => {
@@ -175,6 +176,7 @@ let cardSection;
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cards, userData]) => {
     userInfo.setUserInfo(userData);
+    userInfo.changeUserPhoto(userData.avatar);
     cardSection = new Section(
       {
         data: cards,
