@@ -58,10 +58,7 @@ const handleImageClick = (data) => {
 const handleDelete = (card) => {
   confirmationPopup.open();
   confirmationPopup.setSubmitAction(() => {
-    api
-      .deleteCard(card)
-      .then(() => {})
-      .catch((err) => console.error(err));
+    api.deleteCard(card).catch(console.error);
     confirmationPopup.close();
     card.handleTrashBtn();
   });
@@ -73,7 +70,7 @@ const handleLike = (data, specificCard) => {
     .then((results) => {
       specificCard.setLike(results.isLiked);
     })
-    .catch((err) => console.error(err));
+    .catch(console.error);
 };
 
 const createCard = (data) => {
@@ -99,7 +96,7 @@ const newCardPopup = new PopupWithForm(".add-card-modal", (data) => {
       const cardElement = createCard(results);
       cardSection.addItem(cardElement);
     })
-    .catch((err) => console.error(err))
+    .catch(console.error)
     .finally(() => {
       newCardPopup.renderLoading(false);
     });
@@ -120,7 +117,7 @@ const profilePopup = new PopupWithForm(".profile-modal", (data) => {
     .then((results) => {
       userInfo.setUserInfo(results);
     })
-    .catch((err) => console.error(err))
+    .catch(console.error)
     .finally(() => {
       profilePopup.renderLoading(false);
     });
@@ -136,8 +133,9 @@ const changeProfilePopup = new PopupWithForm(
       .editUserImage(url)
       .then((results) => {
         userInfo.changeUserPhoto(results["avatar"]);
+        console.log(results);
       })
-      .catch((err) => console.error(err))
+      .catch(console.error)
       .finally(() => {
         changeProfilePopup.renderLoading(false);
       });
@@ -159,9 +157,7 @@ confirmationPopup.setEventListener();
 profileEditBtn.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
   profilePopup.open();
-  const info = userInfo.getUserInfo();
-  modalInputName.value = info.name;
-  modalInputOccupation.value = info.occupation;
+  profilePopup.setInputValues(userInfo.getUserInfo());
 });
 
 profileCreateBtn.addEventListener("click", () => {
@@ -177,12 +173,11 @@ profileImageEdit.addEventListener("click", () => {
 let cardSection;
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then((results) => {
-    userInfo.setUserInfo(results[1]);
-    console.log(results);
+  .then(([cards, userData]) => {
+    userInfo.setUserInfo(userData);
     cardSection = new Section(
       {
-        data: results[0],
+        data: cards,
         renderer: (data) => {
           const cardElement = createCard(data);
           cardSection.addItem(cardElement);
@@ -192,4 +187,4 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     );
     cardSection.renderItems();
   })
-  .catch((err) => console.error(err));
+  .catch(console.error);

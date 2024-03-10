@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = [...this._popupForm.querySelectorAll(".modal__input")];
     this._modalBtn = this._popupElement.querySelector(".modal__btn");
+    this._modalBtnText = this._modalBtn.textContent;
   }
 
   close() {
@@ -22,11 +23,17 @@ export default class PopupWithForm extends Popup {
     return data;
   }
 
-  renderLoading(isLoading) {
+  setInputValues(data) {
+    this._inputList.forEach((inputElement) => {
+      inputElement.value = data[inputElement.name];
+    });
+  }
+
+  renderLoading(isLoading, loadingText = "Saving...") {
     if (isLoading) {
-      this._modalBtn.textContent = "Saving...";
+      this._modalBtn.textContent = loadingText;
     } else {
-      this._modalBtn.textContent = "Save";
+      this._modalBtn.textContent = this._modalBtnText;
     }
   }
 
